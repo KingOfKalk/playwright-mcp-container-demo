@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "humao.rest-client",
+    "ms-azuretools.vscode-containers",
+    "ms-vscode-remote.remote-containers",
+    "yzhang.markdown-all-in-one"
+  ]
+}

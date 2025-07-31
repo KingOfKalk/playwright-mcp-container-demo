@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  inspector:
+    image: ghcr.io/modelcontextprotocol/inspector:0.16.2
+    environment:
+      DANGEROUSLY_OMIT_AUTH: "true"
+      HOST: "0.0.0.0"
+      ALLOWED_ORIGINS: "http://localhost:6274,http://127.0.0.1:6274"
+    networks:
+      - mcp-network
+    ports:
+      - 6274:6274
+      - 6277:6277
+    restart: unless-stopped
+
+  playwright:
+    image: mcr.microsoft.com/playwright/mcp:v0.0.32
+    command: --port 8931 --host "0.0.0.0" --isolated --output-dir /app/output --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+    networks:
+      - mcp-network
+    ports:
+      - 8931:8931
+    restart: unless-stopped
+    volumes:
+      - playwright-output:/app/output
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  playwright-output:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./output

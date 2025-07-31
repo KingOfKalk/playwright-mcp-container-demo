@@ -1,0 +1,42 @@
+@host = http://localhost:8931/mcp
+@contentType = application/json
+@accept = application/json,text/event-stream
+@sessionId = {{$guid}}
+
+
+### Initialize the server
+# @name init
+POST {{host}}
+Content-Type: {{contentType}}
+Accept: {{accept}}
+
+{
+  "jsonrpc": "2.0",
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "0.1.0",
+    "capabilities": {
+      "tools": {}
+    },
+    "clientInfo": {
+      "name": "rest-client",
+      "version": "1.0.0"
+    }
+  },
+  "id": "{{sessionId}}"
+}
+
+### Get tools
+
+@mcpSessionId = {{init.response.headers.mcp-session-id}}
+POST {{host}}
+Content-Type: {{contentType}}
+Accept: {{accept}}
+mcp-session-id: {{mcpSessionId}}
+
+{
+  "jsonrpc": "2.0",
+  "method": "tools/list",
+  "params": {},
+  "id": "{{sessionId}}"
+}
