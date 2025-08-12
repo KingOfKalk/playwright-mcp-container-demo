@@ -15,6 +15,24 @@ This is a demonstration on how to run Playwright-MCP in a container environment 
 4. Click on "Connect"
 5. Now you should be connected an click "List Tools".
 
+### Claude Code
+
+Claude Code supports streamable HTTP MCP as well.
+See https://github.com/anthropics/claude-code/issues/1387
+
+```bash
+claude mcp add --transport http playwright http://playwright:8931/mcp
+```
+### Development Containers
+
+Add the network option as a runArgs, so the DevContainer can also make use of Playwright MCP.
+
+```json
+{
+  "runArgs": ["--network=playwright-mcp-container-demo_network"]
+}
+```
+
 ## Hints
 
 - Playwright's default user agent will be blocked by many sites.
