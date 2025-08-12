@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   inspector:
-    image: ghcr.io/modelcontextprotocol/inspector:0.16.2
+    image: ghcr.io/modelcontextprotocol/inspector:0.16.3
     environment:
       DANGEROUSLY_OMIT_AUTH: "true"
       HOST: "0.0.0.0"
@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   playwright:
-    image: mcr.microsoft.com/playwright/mcp:v0.0.32
+    image: mcr.microsoft.com/playwright/mcp:v0.0.33
     command: --port 8931 --host "0.0.0.0" --isolated --output-dir /app/output --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
     networks:
       - mcp-network
